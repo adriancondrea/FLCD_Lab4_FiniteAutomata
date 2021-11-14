@@ -1,7 +1,7 @@
 package model.implementation;
 
-import model.State;
-import model.Transition;
+import model.interfaces.State;
+import model.interfaces.Transition;
 
 public class TransitionImpl implements Transition {
     private final String action;

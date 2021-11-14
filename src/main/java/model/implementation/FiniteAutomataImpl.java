@@ -1,10 +1,10 @@
 package model.implementation;
 
-import model.FiniteAutomata;
-import model.State;
+import model.interfaces.FiniteAutomata;
+import model.interfaces.State;
 
 public class FiniteAutomataImpl implements FiniteAutomata {
-    private State currentState;
+    private final State currentState;
 
     public FiniteAutomataImpl(State initialState){
         this.currentState = initialState;

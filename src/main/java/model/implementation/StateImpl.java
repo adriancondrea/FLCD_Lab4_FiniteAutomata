@@ -1,14 +1,14 @@
 package model.implementation;
 
-import model.State;
-import model.Transition;
+import model.interfaces.State;
+import model.interfaces.Transition;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StateImpl implements State {
 
-    private List<Transition> transitions;
+    private final List<Transition> transitions;
     private boolean isFinal;
 
 

@@ -1,5 +1,5 @@
-import model.FiniteAutomata;
-import model.State;
+import model.interfaces.FiniteAutomata;
+import model.interfaces.State;
 import model.implementation.FiniteAutomataImpl;
 import model.implementation.StateImpl;
 import model.implementation.TransitionImpl;
@@ -43,29 +43,23 @@ public class Main {
                 }
                 case "3" -> {
                     output.append("Transitions are:\n");
-                    stateMap.forEach((stateName, state) -> {
-                        state.getTransitions().forEach(transition -> {
-                            output.append(String.format("\t(%s, %s)->%s%n",
-                                    stateName,
-                                    transition.getAction(),
-                                    stateMap.entrySet()
-                                            .stream()
-                                            .filter(entry -> transition.getNextState().equals(entry.getValue()))
-                                            .map(Map.Entry::getKey)
-                                            .findAny()
-                                            .orElse("Invalid")));
-                        });
-                    });
+                    stateMap.forEach((stateName, state) -> state.getTransitions().forEach(transition -> output.append(String.format("\t(%s, %s)->%s%n",
+                            stateName,
+                            transition.getAction(),
+                            stateMap.entrySet()
+                                    .stream()
+                                    .filter(entry -> transition.getNextState().equals(entry.getValue()))
+                                    .map(Map.Entry::getKey)
+                                    .findAny()
+                                    .orElse("Invalid")))));
                 }
                 case "4" -> {
                     output.append("Final states are: ");
-                    stateMap.entrySet()
-                            .stream()
-                            .forEach(entry -> {
-                                if (entry.getValue().isFinal()) {
-                                    output.append(entry.getKey()).append(" ");
-                                }
-                            });
+                    stateMap.forEach((key, value) -> {
+                        if (value.isFinal()) {
+                            output.append(key).append(" ");
+                        }
+                    });
                 }
                 case "5" -> {
                     FiniteAutomata finiteAutomata = new FiniteAutomataImpl(stateMap.get(initialState));
@@ -87,9 +81,7 @@ public class Main {
                         output.append("Sequence not accepted; stack is empty, but we are not on final state!");
                     }
                 }
-                case "6" -> {
-                    output.append("Initial state is: ").append(initialState);
-                }
+                case "6" -> output.append("Initial state is: ").append(initialState);
                 default -> output.append("invalid choice!");
             }
             System.out.println(output);
@@ -153,9 +145,7 @@ public class Main {
                     stateMap.get(firstState).addTransition(new TransitionImpl(action, stateMap.get(resultState)));
                 }
             }
-            default -> {
-                throw new Exception("Invalid input file!");
-            }
+            default -> throw new Exception("Invalid input file!");
         }
     }
 

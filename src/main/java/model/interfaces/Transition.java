@@ -1,4 +1,4 @@
-package model;
+package model.interfaces;
 
 public interface Transition {
     boolean isPossible(CharSequence c);

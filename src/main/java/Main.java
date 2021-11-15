@@ -16,7 +16,7 @@ public class Main {
     static String initialState;
 
     public static void main(String[] args) throws IOException {
-        readFiniteAutomata();
+        readFiniteAutomata("FA2.in");
         printMenu();
     }
 
@@ -88,9 +88,9 @@ public class Main {
         }
     }
 
-    private static void readFiniteAutomata() {
+    private static void readFiniteAutomata(String filename) {
         try {
-            File myObj = new File("FA2.in");
+            File myObj = new File(filename);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String line = myReader.nextLine().trim();
